@@ -211,6 +211,40 @@ header {
     font-weight: bold;
 }
 
+/*Estilos para produtos*/
+
+.product-filter-brands ul {
+    display: flex;
+}
+
+.product-filter-brands ul li{
+    list-style: none;
+    margin-right: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #838383;
+}
+
+.product-filter-brands ul li.product-brand-active{
+    border-bottom: 2px solid #0156FF;
+    color: #000;
+}
+
+.notebook-products, .cpu-products{
+    display: flex;
+    margin-top: 30px;
+}
+
+.produtct-cover{
+    margin-right: 20PX;
+}
+
+.product-cover img{
+    height: fit-content;
+    width: 300px;
+}
+
 
 /* Estilo para telas médias */
 
