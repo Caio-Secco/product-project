@@ -231,7 +231,7 @@ header {
     color: #000;
 }
 
-.notebook-products, .cpu-products{
+.notebook-products, .cpu-products, .monitor-products {
     display: flex;
     margin-top: 30px;
 }
@@ -245,6 +245,71 @@ header {
     width: 300px;
 }
 
+/* Estilo para o slider de patrocinadores*/
+
+.content-sponsors{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 150px;
+}
+
+.slider-sponsors{
+    display: flex;
+    animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+    0%{
+        transform: translateX(0);
+    }
+
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+.slider-sponsors img{
+    max-width: 100%;
+    height: auto;
+    margin-right: 20px;
+}
+
+/* Estilo para os depoimentos */
+
+.content-testimonial{
+    background-color: #f5f7ff;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 60px;
+    box-sizing: border-box;
+}
+
+.name-testimonial{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.controls-testimonial{
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 30px;
+}
+
+.controls-testimonial span{
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    background-color: #cacdd8;
+    cursor: pointer;
+}
+
+.content-testimonial span.active-testimonial{
+    background-color: #0156ff;
+}
 
 /* Estilo para telas médias */
 
