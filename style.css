@@ -359,6 +359,90 @@ header {
     background-color: #0156ff;
 }
 
+/* Estilo para a qualidade */
+
+.info-quality{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 40px;
+}
+
+.card-quality{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.card-quality h1{
+    font-size: 18px;
+}
+
+.card-quality h2{
+    width: 300px;
+    font-size: 14px;
+    color: #000000;
+    font-weight: normal;
+}
+
+/* Estilo para o formulário */
+
+.content-contact-form{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+}
+
+.texts-form-contact h1{
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.info-contact-form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.line-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.group-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.group-form label{
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.group-form label span{
+    color: #c94d3f;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea{
+    border: 1px solid #a2a6b0;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+
 /* Estilo para telas médias */
 
 @media screen and (max-width: 1200px) {
