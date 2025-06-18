@@ -64,7 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const slider = document.querySelector('.slider-sponsors');
     const images = slider.querySelectorAll('img');
 
-    images.forEach(image =>{
+    images.forEach(image => {
         const clone = image.cloneNode(true);
         slider.appendChild(clone);
     });
@@ -77,7 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const moveSlider = () => {
         currentPosition -= 1;
-        if(currentPosition <= -totalWidth/2){
+        if (currentPosition <= -totalWidth / 2) {
             currentPosition = 0;
         }
         slider.style.transform = `translateX(${currentPosition}px)`;
@@ -98,7 +98,7 @@ window.addEventListener("DOMContentLoaded", () => {
     testimonials.forEach(testimonial => testimonial.style.display = 'none');
     firstTestimonial.style.display = "block";
 
-    controls.forEach(control =>{
+    controls.forEach(control => {
         control.addEventListener("click", () => {
             const targetSlide = control.getAttribute('data-slide');
             controls.forEach(c => c.classList.remove('active-testimonial'));
@@ -114,3 +114,76 @@ window.addEventListener("DOMContentLoaded", () => {
 
     firstControl.classList.add("active-testimonial");
 })
+
+// manipulação do carrinho de produtos //
+
+const productsArray = [];
+
+function increaseQuantity(event) {
+    const quantityElement = event.target.parentElement.querySelector('.number-quantity');
+    const quantity = parseInt(quantityElement.textContent);
+    quantityElement.textContent = quantity + 1;
+}
+
+function decreaseQuantity(event) {
+    const quantityElement = event.target.parentElement.querySelector('.number-quantity');
+    const quantity = parseInt(quantityElement.textContent);
+
+    if (quantity > 0) {
+        quantityElement.textContent = quantity - 1;
+    }
+}
+
+function updateCart(){
+    const cart = document.querySelector('.item-cart');
+    cart.textContent = productsArray.length
+}
+
+function addProductToCart(event){
+    const productCard = event.target.closest('.card-new-products');
+    const productName = productCard.querySelector('.info-product h3').textContent;
+    const priceText = productCard.querySelector('.new-price').textContent;
+    const price = parseFloat(priceText.replace("R$", ""));
+
+    const quantityElement = productCard.querySelector(".number-quantity");
+ 
+    let quantity = parseInt(quantityElement.textContent);
+
+    const existingProductIndex = productsArray.findIndex((product) => product.productName === productName);
+
+    if (quantity > 0) {
+        if (existingProductIndex !== -1) {
+            productsArray[existingProductIndex].quantity = quantity;
+        } else {
+            productsArray.push({
+                productName: productName,
+                price: price,
+                quantity: quantity
+            })
+        }
+    }else{
+        if(existingProductIndex !== -1){
+            productsArray.splice(existingProductIndex, 1);
+        }
+    }
+
+    updateCart();
+}
+
+const increaseButtons = document.querySelectorAll('.increase-quantity');
+const decreaseButtons = document.querySelectorAll('.decrease-quantity');
+const addCartButtons = document.querySelectorAll('.confirm-add-cart');
+
+
+increaseButtons.forEach(button => {
+    button.addEventListener("click", increaseQuantity)
+})
+
+decreaseButtons.forEach(button => {
+    button.addEventListener("click", decreaseQuantity)
+})
+
+addCartButtons.forEach((button) => {
+    button.addEventListener("click", addProductToCart);
+})
+
