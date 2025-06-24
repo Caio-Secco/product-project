@@ -134,19 +134,19 @@ function decreaseQuantity(event) {
     }
 }
 
-function updateCart(){
+function updateCart() {
     const cart = document.querySelector('.item-cart');
     cart.textContent = productsArray.length
 }
 
-function addProductToCart(event){
+function addProductToCart(event) {
     const productCard = event.target.closest('.card-new-products');
     const productName = productCard.querySelector('.info-product h3').textContent;
     const priceText = productCard.querySelector('.new-price').textContent;
     const price = parseFloat(priceText.replace("R$", ""));
 
     const quantityElement = productCard.querySelector(".number-quantity");
- 
+
     let quantity = parseInt(quantityElement.textContent);
 
     const existingProductIndex = productsArray.findIndex((product) => product.productName === productName);
@@ -161,8 +161,8 @@ function addProductToCart(event){
                 quantity: quantity
             })
         }
-    }else{
-        if(existingProductIndex !== -1){
+    } else {
+        if (existingProductIndex !== -1) {
             productsArray.splice(existingProductIndex, 1);
         }
     }
@@ -186,4 +186,51 @@ decreaseButtons.forEach(button => {
 addCartButtons.forEach((button) => {
     button.addEventListener("click", addProductToCart);
 })
+
+
+// Carrinho
+
+const inputCep = document.querySelector("#cep");
+const inputStreet = document.querySelector("#street");
+const inputCity = document.querySelector("#city");
+const inputState = document.querySelector("#state");
+const inputNeighborhood = document.querySelector("#neighborhood");
+const inputNumber = document.querySelector("#number");
+const searchCepBtn = document.querySelector(".search-cep");
+
+searchCepBtn.addEventListener("click", buscarCep);
+
+function buscarCep() {
+    const typedCep = inputCep.value.trim().replace(/\D/g, "");
+
+    if (typedCep.length !== 8) {
+        alert("Digite um CEP válido com 8 números.");
+        return;
+    }
+
+    fetch(`https://viacep.com.br/ws/${typedCep}/json/`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erro na resposta da API");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data.erro) {
+                alert("CEP não encontrado.");
+                return;
+            }
+
+            inputCity.value = data.localidade;
+            inputState.value = data.uf;
+            inputNeighborhood.value = data.bairro;
+            inputStreet.value = data.logradouro;
+        })
+        .catch((error) => {
+            console.error("Erro ao buscar CEP:", error.message);
+            alert("Erro ao buscar CEP. Tente novamente.");
+        });
+}
+
+
 
